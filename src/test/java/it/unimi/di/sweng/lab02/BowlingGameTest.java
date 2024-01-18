@@ -9,13 +9,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class BowlingGameTest {
 
+	private BowlingGame game = new BowlingGame();
+
 	@Test
 	void worstGame() {
 
-		BowlingGame game = new BowlingGame();
-		for (int i = 0; i < 20; i++) {
-			game.roll(0);
-		}
+		rollZeros(20);
 		int score = game.score();
 		assertThat(score).isEqualTo(0);
 	}
@@ -23,25 +22,20 @@ public class BowlingGameTest {
 	@Test
 	void onePinDown() {
 
-		BowlingGame game = new BowlingGame();
 		game.roll(1);
-		for (int i = 0; i < 19; i++) {
-			game.roll(0);
-		}
+		rollZeros(19);
 		int score = game.score();
 		assertThat(score).isEqualTo(1);
 	}
 
 	@Test
 	void tooLargeRoll(){
-		BowlingGame game = new BowlingGame();
 		assertThatThrownBy(() -> game.roll(11))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void negativeNumberRoll(){
-		BowlingGame game = new BowlingGame();
 		assertThatThrownBy(() -> game.roll(-1))
 				.isInstanceOf(IllegalArgumentException.class);
 	}
@@ -49,31 +43,29 @@ public class BowlingGameTest {
 	@Test
 	void spareTest() {
 
-		BowlingGame game = new BowlingGame();
 		game.roll(5);
 		game.roll(5);
 		game.roll(1);
-		for (int i = 0; i < 17; i++) {
-			game.roll(0);
-		}
-		int score = game.score();
-		assertThat(score).isEqualTo(12);
+		rollZeros(17);
+		assertThat(game.score()).isEqualTo(12);
 	}
 
 	@Test
 	void nonSpareTest() {
-		BowlingGame game = new BowlingGame();
 		// first frame not a spare
 		game.roll(0);
 		game.roll(5);
 		// second frame not a spare
 		game.roll(5);
 		game.roll(1);
-		for (int i = 0; i < 16; i++) {
+		rollZeros(16);
+		assertThat(game.score()).isEqualTo(11);
+	}
+
+	private void rollZeros(int numberOfRolls) {
+		for (int i = 0; i < numberOfRolls; i++) {
 			game.roll(0);
 		}
-		int score = game.score();
-		assertThat(score).isEqualTo(11);
 	}
 
 }
