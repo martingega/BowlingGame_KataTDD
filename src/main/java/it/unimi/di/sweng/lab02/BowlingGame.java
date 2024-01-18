@@ -17,7 +17,13 @@ public class BowlingGame {
 	}
 
 	public int score(){
-		return rolls.stream().mapToInt(i -> i).sum();
+		int baseScore = rolls.stream().mapToInt(i -> i).sum();
+		int bonus = 0;
+		for (int i = 2; i < rolls.size(); i+=2){
+			if (rolls.get(i - 1) + rolls.get(i - 2) == 10)
+				bonus += rolls.get(i);
+		}
+		return baseScore + bonus;
 	}
 
 }
