@@ -26,14 +26,19 @@ public class BowlingGame {
 		int bonus = 0;
 		for (int i = 0; i < frames.size() - 1; i++) {
 			Frame frame = frames.get(i);
+			Frame nextFrame = frames.get(i + 1);
 			if (frame.isSpare()) {
 				// bonus point from the FIRST roll of the NEXT frame
 				bonus += frames.get(i + 1).getRoll1();
 			}
-			if (frame.isStrike()){
+			if (frame.isStrike() && !nextFrame.isStrike()){
 				//fix strike after strike (it doesn't consider it here)
 				bonus += frames.get(i + 1).getRoll1();
 				bonus += frames.get(i + 1).getRoll2();
+			}
+			if (frame.isStrike() && nextFrame.isStrike() && i < frames.size() - 3){
+				bonus += frames.get(i + 1).getRoll1();
+				bonus += frames.get(i + 2).getRoll1();
 			}
 		}
 		return baseScore + bonus;
@@ -45,7 +50,11 @@ public class BowlingGame {
 		for(int i = 0; i < rolls.size(); i++){
 			if(rolls.get(i) == 10){
 				frames.add(new Frame(10, 0));
-			} else {
+			} else if (rolls.get(i) == 10 && i == rolls.size() - 2) {
+				frames.add(new Frame(10, 0));
+				frames.add(new Frame(rolls.get(i), rolls.get(i + 1)));
+				i++;
+			}  else {
 				Frame frame = new Frame(rolls.get(i), rolls.get(i + 1));
 				frames.add(frame);
 				i++;
