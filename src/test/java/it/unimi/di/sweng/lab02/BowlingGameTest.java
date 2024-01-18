@@ -45,7 +45,8 @@ public class BowlingGameTest {
 
 		roll(5, 5, 1);
 		rollZeros(17);
-		assertThat(game.score()).isEqualTo(12);
+		int score = game.score();
+		assertThat(score).isEqualTo(12);
 	}
 
 	@Test
@@ -57,7 +58,8 @@ public class BowlingGameTest {
 		game.roll(5);
 		game.roll(1);
 		rollZeros(16);
-		assertThat(game.score()).isEqualTo(11);
+		int score = game.score();
+		assertThat(score).isEqualTo(11);
 	}
 
 	private void rollZeros(int numberOfRolls) {

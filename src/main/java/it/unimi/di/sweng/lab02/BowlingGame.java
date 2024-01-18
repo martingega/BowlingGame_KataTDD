@@ -6,7 +6,7 @@ import java.util.List;
 public class BowlingGame {
 
 	private int count; // count of rolled down pins
-	private List<Integer> rolls = new ArrayList<>();
+	private final List<Integer> rolls = new ArrayList<>();
 
 	public void roll(int pins){
 		if(pins > 10 || pins < 0) {
