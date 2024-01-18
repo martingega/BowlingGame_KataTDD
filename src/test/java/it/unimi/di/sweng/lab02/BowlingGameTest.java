@@ -50,6 +50,15 @@ public class BowlingGameTest {
 	}
 
 	@Test
+	void twoSparesTest() {
+
+		roll(5, 5, 5, 5, 1);
+		rollZeros(15);
+		int score = game.score();
+		assertThat(score).isEqualTo(15 + 11 + 1);
+	}
+
+	@Test
 	void nonSpareTest() {
 		// first frame not a spare
 		game.roll(0);
