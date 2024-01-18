@@ -1,5 +1,7 @@
 package it.unimi.di.sweng.lab02;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +19,8 @@ public class BowlingGame {
 	}
 
 	public int score(){
-		List<Frame> frames = new ArrayList<>();
-		for(int i = 0; i < rolls.size(); i+=2){
-			Frame frame = new Frame(rolls.get(i), rolls.get(i + 1));
-			frames.add(frame);
-		}
+		List<Frame> frames = buildFrames();
+
 		int baseScore = frames.stream().mapToInt(Frame::baseScore).sum();
 
 		int bonus = 0;
@@ -33,6 +32,16 @@ public class BowlingGame {
 			}
 		}
 		return baseScore + bonus;
+	}
+
+	@NotNull
+	private List<Frame> buildFrames() {
+		List<Frame> frames = new ArrayList<>();
+		for(int i = 0; i < rolls.size(); i+=2){
+			Frame frame = new Frame(rolls.get(i), rolls.get(i + 1));
+			frames.add(frame);
+		}
+		return frames;
 	}
 
 }
