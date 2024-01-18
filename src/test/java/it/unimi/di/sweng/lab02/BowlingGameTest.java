@@ -71,6 +71,16 @@ public class BowlingGameTest {
 		assertThat(score).isEqualTo(11);
 	}
 
+	@Test
+	@Disabled
+	void strikeTest() {
+
+		roll(10, 1, 1);
+		rollZeros(16);
+		int score = game.score();
+		assertThat(score).isEqualTo(12 + 2);
+	}
+
 	private void rollZeros(int numberOfRolls) {
 		for (int i = 0; i < numberOfRolls; i++) {
 			game.roll(0);

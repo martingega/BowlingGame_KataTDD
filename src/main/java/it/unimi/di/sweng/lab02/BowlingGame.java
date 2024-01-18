@@ -17,11 +17,20 @@ public class BowlingGame {
 	}
 
 	public int score(){
-		int baseScore = rolls.stream().mapToInt(i -> i).sum();
+		List<Frame> frames = new ArrayList<>();
+		for(int i = 0; i < rolls.size(); i+=2){
+			Frame frame = new Frame(rolls.get(i), rolls.get(i + 1));
+			frames.add(frame);
+		}
+		int baseScore = frames.stream().mapToInt(Frame::baseScore).sum();
+
 		int bonus = 0;
-		for (int i = 2; i < rolls.size(); i+=2){
-			if (rolls.get(i - 1) + rolls.get(i - 2) == 10)
-				bonus += rolls.get(i);
+		for (int i = 0; i < frames.size() - 1; i++) {
+			Frame frame = frames.get(i);
+			if (frame.isSpare()) {
+				// bonus point from the FIRST roll of the NEXT frame
+				bonus += frames.get(i + 1).getRoll1();
+			}
 		}
 		return baseScore + bonus;
 	}
