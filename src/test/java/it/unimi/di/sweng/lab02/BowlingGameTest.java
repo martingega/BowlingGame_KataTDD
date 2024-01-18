@@ -1,5 +1,6 @@
 package it.unimi.di.sweng.lab02;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,6 +44,18 @@ public class BowlingGameTest {
 		BowlingGame game = new BowlingGame();
 		assertThatThrownBy(() -> game.roll(-1))
 				.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@Disabled
+	void spareTest() {
+
+		BowlingGame game = new BowlingGame();
+		game.roll(5);
+		game.roll(5);
+		game.roll(1);
+		int score = game.score();
+		assertThat(score).isEqualTo(12);
 	}
 
 }
