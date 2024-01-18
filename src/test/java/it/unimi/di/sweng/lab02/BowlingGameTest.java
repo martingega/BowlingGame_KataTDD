@@ -38,4 +38,11 @@ public class BowlingGameTest {
 				.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	void negativeNumberRoll(){
+		BowlingGame game = new BowlingGame();
+		assertThatThrownBy(() -> game.roll(-1))
+				.isInstanceOf(IllegalArgumentException.class);
+	}
+
 }
