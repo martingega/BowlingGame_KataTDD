@@ -80,6 +80,16 @@ public class BowlingGameTest {
 		assertThat(score).isEqualTo(12 + 2);
 	}
 
+	@Test
+	void godGame() {
+		// scoring a strike in every frame
+		for (int i = 0; i < 12; i++) {
+			game.roll(10);
+		}
+		int score = game.score();
+		assertThat(score).isEqualTo(300);
+	}
+
 	private void rollZeros(int numberOfRolls) {
 		for (int i = 0; i < numberOfRolls; i++) {
 			game.roll(0);

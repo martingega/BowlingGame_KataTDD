@@ -31,6 +31,7 @@ public class BowlingGame {
 				bonus += frames.get(i + 1).getRoll1();
 			}
 			if (frame.isStrike()){
+				//fix strike after strike (it doesn't consider it here)
 				bonus += frames.get(i + 1).getRoll1();
 				bonus += frames.get(i + 1).getRoll2();
 			}
