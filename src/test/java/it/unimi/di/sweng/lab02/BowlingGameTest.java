@@ -43,9 +43,7 @@ public class BowlingGameTest {
 	@Test
 	void spareTest() {
 
-		game.roll(5);
-		game.roll(5);
-		game.roll(1);
+		roll(5, 5, 1);
 		rollZeros(17);
 		assertThat(game.score()).isEqualTo(12);
 	}
@@ -65,6 +63,12 @@ public class BowlingGameTest {
 	private void rollZeros(int numberOfRolls) {
 		for (int i = 0; i < numberOfRolls; i++) {
 			game.roll(0);
+		}
+	}
+
+	private void roll(int... pinsArray) {
+		for (int pins : pinsArray) {
+			game.roll(pins);
 		}
 	}
 
