@@ -72,7 +72,6 @@ public class BowlingGameTest {
 	}
 
 	@Test
-	@Disabled
 	void strikeTest() {
 
 		roll(10, 1, 1);

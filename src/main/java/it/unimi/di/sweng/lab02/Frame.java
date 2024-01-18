@@ -15,7 +15,11 @@ public class Frame {
     }
 
     public boolean isSpare() {
-        return roll1 + roll2 == 10;
+        return roll1 + roll2 == 10 && roll2 != 0;
+    }
+
+    public boolean isStrike() {
+        return roll1 == 10 && roll2 == 0;
     }
 
     public int getRoll1(){
