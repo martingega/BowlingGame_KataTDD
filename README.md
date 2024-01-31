@@ -2,9 +2,9 @@
 
 ## KATA BOWLING EXERCISE
 
-* STUDENTE: GEGA Martin
+* STUDENT: GEGA Martin
 
-### Bowling Rules
+## Bowling Rules
 
 The game consists of 10 frames.
 
@@ -22,8 +22,10 @@ In the tenth frame a player who rolls a spare or strike is allowed to roll the e
 
 Write a class Game that has two methods:
 
-* void roll(int)
+> *void roll(int)*
+
 is called each time the player rolls a ball. The argument is the number of pins knocked down.
 
-* int score() 
+> *int score()*
+
 returns the total score for the game.
